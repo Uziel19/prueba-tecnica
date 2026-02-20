@@ -34,11 +34,11 @@ class UserService implements UserServiceInterface
 
         if ((!$user) || !(password_verify($password, $user->password))) throw new InvalidCredentialsException();
 
-        $token = $user->createToken('api-token', ['*'], now()->addYears(1))->plainTextToken;
+        $token = $user->createToken('api-token', ['*'], now()->addMinutes(5))->plainTextToken;
 
         return [
             'token' => $token,
-            'date_finish' => now()->addYears(1)->toDateTimeString()
+            'date_finish' => now()->addMinutes(5)->toDateTimeString()
         ];
     }
 
